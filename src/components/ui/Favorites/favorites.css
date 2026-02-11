@@ -1,0 +1,47 @@
+.favorites {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: red;
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 2px solid var(--border);
+}
+
+.favorites__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid var(--border);
+  padding: 15px;
+}
+
+.favorites__title-wrap svg {
+  width: 35px;
+  height: 35px;
+  padding: 7px;
+  border-radius: 12px;
+  background-color: var(--favorite);
+  color: var(--green);
+}
+
+.favorites__text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.favorites__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--title);
+}
+
+.favorites__text {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.favorites__card-list-wrap {
+  padding: 24px 15px;
+}

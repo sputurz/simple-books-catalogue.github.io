@@ -53,7 +53,8 @@ a {
 }
 
 .container {
-  max-width: 1680px;
+  max-width: 1726px;
+  /* max-width: 1680px; */
   margin: 0 auto;
   padding: 0 24px;
 }

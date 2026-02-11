@@ -1,38 +1,45 @@
 .header {
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 60px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 40px;
 }
 
 .header__wrap {
   display: flex;
-  padding: 20px 0 20px 15px;
+  padding: 15px 0 12px 16px;
 }
 
 .header__link {
   display: flex;
   align-items: center;
   gap: 10px;
+  transition: opacity ease-in 0.3s;
+}
+
+.header__link:hover {
+  opacity: 0.8;
 }
 
 .header__logo {
   background-color: var(--green);
   padding: 8px;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
 }
 
 .header__inner {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 
 .header__title {
   font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: 600;
   color: var(--title);
 }
 
 .header__slogan {
   color: var(--text);
+  font-size: 14px;
 }

@@ -8,7 +8,7 @@ export const Header = () => {
       <div class="container">
         <div class="header__wrap">
           <a class="header__link" href="/" aria-label="Link to The Library">
-            <img class="header__logo" alt="The Library Logo" src="${logo}" />
+            <img class="header__logo" alt="" src="${logo}" />
             <div class="header__inner">
               <span class="header__title">The Library</span>
               <span class="header__slogan"
