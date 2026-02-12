@@ -45,6 +45,29 @@
   max-width: 780px;
 }
 
+.main-page__anchor-link {
+  position: sticky;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  transform: translateY(80vh);
+  margin-right: 10px;
+  justify-self: right;
+  color: var(--white);
+  background-color: var(--green);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+  opacity: 0.5;
+  transition: opacity ease-in 0.3s;
+}
+
+.main-page__anchor-link:hover {
+  opacity: 1;
+}
+
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
   .main-page__wrap {
     grid-template-columns: 75% 1fr;
@@ -65,6 +88,10 @@
   .main-page__inner,
   .main-page__search {
     grid-column: span 1;
+  }
+
+  .main-page__anchor-link {
+    display: flex;
   }
 }
 

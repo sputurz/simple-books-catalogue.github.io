@@ -81,6 +81,7 @@ const cards = [
 
 export const MainPage = () => {
   return html`<section class="main-page">
+    <a class="main-page__anchor-link" href='#' aria-label="Go to up">↑</a>
     <div class="container">
         <div class="main-page__wrap">
             <div class="main-page__inner">
@@ -89,6 +90,7 @@ export const MainPage = () => {
             </div>
             <div class="main-page__search">
               ${Search(cards)}
+              
             </div>
             ${CardList(cards)}
             ${Favorites()}
