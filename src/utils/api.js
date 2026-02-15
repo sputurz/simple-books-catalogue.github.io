@@ -22,6 +22,7 @@ export async function getBooksList(query) {
     return data.docs;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 

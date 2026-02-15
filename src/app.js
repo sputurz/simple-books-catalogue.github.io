@@ -9,6 +9,7 @@ export const App = async () => {
   // Searching containers by QS in DOM
   const searchInputEl = document.querySelector('.search__input');
   const searchBtnEl = document.querySelector('.search__btn');
+  const searchErrorEl = document.querySelector('.search__info');
   const searchListContainerEl = document.querySelector(
     '.main-page__search-list',
   );
@@ -34,26 +35,43 @@ export const App = async () => {
 
   // Handlers
   function handleLikeToggle(key) {
-    const item = favoriteList.find((item) => item.key === key);
+    const bookFromSearch = searchList.find((item) => item.key === key);
 
-    favoriteListEl.removeItem(item.key);
+    if (bookFromSearch) {
+      bookFromSearch.isFavorite = !bookFromSearch.isFavorite;
 
-    favoriteKeys = favoriteKeys.filter((item) => item !== key);
-    saveItemToLS(favoriteKeys);
+      if (bookFromSearch.isFavorite) {
+        favoriteList.push(bookFromSearch);
+        favoriteKeys.push(key);
+      } else {
+        favoriteList = favoriteList.filter((item) => item.key !== key);
+        favoriteKeys = favoriteKeys.filter((item) => item !== key);
+      }
 
-    favoriteQtyEl.textContent = favoriteKeys.length;
+      saveItemToLS(favoriteKeys);
+
+      favoriteQtyEl.textContent = favoriteKeys.length;
+      searchListEl.updateItem(bookFromSearch);
+
+      if (bookFromSearch.isFavorite) {
+        favoriteListEl.addItem(bookFromSearch);
+      } else {
+        favoriteListEl.removeItem(key);
+      }
+    }
   }
 
   async function handleSearchBtnClick(searchList) {
     const currentSearchQuery = searchInputEl.value.trim();
+    searchErrorEl.classList.remove('search__info--result');
+    searchErrorEl.classList.remove('search__info--error');
 
     if (!currentSearchQuery) {
-      console.log(`zero`);
+      searchErrorEl.classList.add('search__info--result');
+      searchErrorEl.textContent = 'Empty request';
 
       return;
     } else if (currentSearchQuery === searchQuery) {
-      console.log(`the same`);
-
       return;
     }
 
@@ -64,16 +82,22 @@ export const App = async () => {
     try {
       const bookList = await getBooksList(currentSearchQuery);
 
-      if (bookList) {
-        searchList = bookListToCardList(bookList, searchList, favoriteKeys);
-        renderSearchList(searchList);
-
-        searchQuery = currentSearchQuery;
-
-        console.log(searchList);
+      if (!bookList || bookList.length === 0) {
+        searchErrorEl.classList.add('search__info--error');
+        searchErrorEl.textContent = 'No books found';
+        return;
       }
+
+      searchList = bookListToCardList(bookList, searchList, favoriteKeys);
+      renderSearchList(searchList);
+
+      searchQuery = currentSearchQuery;
+
+      console.log(searchList);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      searchErrorEl.classList.add('search__info--error');
+      searchErrorEl.textContent = `Error: ${error}`;
     } finally {
       searchBtnEl.disabled = false;
       searchInputEl.disabled = false;
